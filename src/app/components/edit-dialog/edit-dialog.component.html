@@ -1,0 +1,17 @@
+<div class="" fxLayout="column">
+  <form [formGroup]="userForm">
+    <mat-form-field >
+      <input matInput placeholder="username" formControlName="username">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="password" formControlName="password">
+    </mat-form-field>
+  </form>
+
+  <div mat-dialog-actions>
+    <div class="" fxLayout="row">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button (click)="editUser()" cdkFocusInitial>Update</button>
+    </div>
+  </div>
+</div>

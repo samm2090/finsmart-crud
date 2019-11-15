@@ -1,0 +1,15 @@
+  <form [formGroup]="userForm">
+    <div class="container" fxLayout="column" fxLayoutAlign="center">
+      <h1>Login</h1>
+      <mat-form-field>
+        <input matInput placeholder="username" formControlName="username" autofocus name="txtUsername">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="password" formControlName="password" name="txtPassword">
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <button type="button" fxFlex="30" name="btnCreate" mat-raised-button color="primary" [routerLink]="['/create-user']">Create</button>
+        <button type="button" fxFlex="30" name="btnLogin" [disabled]="loading" (click)="login()">Login</button>
+      </div>
+    </div>
+  </form>

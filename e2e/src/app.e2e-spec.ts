@@ -1,16 +1,41 @@
-import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, logging, protractor } from 'protractor';
+import { LoginPage } from './login.po';
+import { CreateUserPage } from './create.po';
 
 describe('workspace-project App', () => {
-  let page: AppPage;
+  let loginPage: LoginPage;
+  let createPage : CreateUserPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    // loginPage = new LoginPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('finsmart app is running!');
+  it('should display wrong credentials', () => {
+    loginPage.navigateTo();
+    loginPage.getUsernameControl().sendKeys('abc');
+    loginPage.getPasswordControl().sendKeys('abc');
+    loginPage.getLoginButtonControl().click();
+    const EC = protractor.ExpectedConditions;
+
+    const snackbar = loginPage.getSnackBar();
+    browser.wait(EC.visibilityOf(snackbar), 10000);
+    snackbar.getText().then((val) => {
+      expect(val).toEqual('Wrong credentials');
+    });
+  });
+
+  it('it should  ', () => {
+    loginPage.navigateTo();
+    loginPage.getUsernameControl().sendKeys('abc');
+    loginPage.getPasswordControl().sendKeys('abc');
+    loginPage.getLoginButtonControl().click();
+    const EC = protractor.ExpectedConditions;
+
+    const snackbar = loginPage.getSnackBar();
+    browser.wait(EC.visibilityOf(snackbar), 10000);
+    snackbar.getText().then((val) => {
+      expect(val).toEqual('Wrong credentials');
+    });
   });
 
   afterEach(async () => {

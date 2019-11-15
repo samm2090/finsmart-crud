@@ -1,0 +1,26 @@
+<form [formGroup]="userForm">
+  <div class="container" fxLayout="column" fxLayoutAlign="center">
+    <h1>Login</h1>
+    <mat-form-field>
+      <input matInput placeholder="username" formControlName="username"  [errorStateMatcher]="matcher">
+    </mat-form-field>
+    <mat-error *ngIf="userForm.controls['username'].hasError('required')">
+      username is <strong>required</strong>
+    </mat-error>
+    <mat-form-field>
+      <input matInput placeholder="email" formControlName="email"  [errorStateMatcher]="matcher">
+    </mat-form-field>
+    <mat-error *ngIf="userForm.controls['password'].hasError('required')">
+      password is <strong>required</strong>
+    </mat-error>
+    <mat-form-field>
+      <input matInput type="password" placeholder="password" formControlName="password"  [errorStateMatcher]="matcher">
+    </mat-form-field>
+    <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+      email is <strong>required</strong>
+    </mat-error>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <button type="button" fxFlex="30" mat-raised-button color="primary" (click)="create()">Create</button>
+    </div>
+  </div>
+</form>
