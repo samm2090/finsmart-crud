@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { UserService } from './../../services/user.service';
 import { User } from './../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,7 +17,8 @@ export class CreateUserComponent implements OnInit {
 
   constructor(private userService: UserService,
     private snackBar: MatSnackBar,
-    private router: Router) {
+    private router: Router
+  ) {
     this.loading = false;
   }
 
@@ -25,7 +26,7 @@ export class CreateUserComponent implements OnInit {
     this.userForm = new FormGroup({
       username: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required]),
-      email: new FormControl("", [Validators.required])
+      email: new FormControl("", [Validators.required], this.validateEmail.bind(this))
     });
   }
 
@@ -34,6 +35,7 @@ export class CreateUserComponent implements OnInit {
     if (this.userForm.valid) {
       let user = new User(this.userForm.controls['username'].value,
         this.userForm.controls['password'].value);
+      user.email = this.userForm.controls['email'].value;
 
       this.userService.create(user).subscribe((resp: any) => {
         let message = 'User created with id: ' + resp.name;
@@ -47,6 +49,19 @@ export class CreateUserComponent implements OnInit {
     } else {
       this.snackBar.open("Complete all the required fields", 'Close', { duration: 2000 });
     }
+  }
+
+  validateEmail(control: AbstractControl): { [key: string]: any } | null {
+    return new Promise(resolve => {
+      this.userService.findAll().subscribe((resp) => {
+        for (let user of resp) {
+          if (user.email === control.value) {
+            resolve({ emailTaken: true });
+          }
+          resolve(null);
+        }
+      });
+    });
   }
 
 }

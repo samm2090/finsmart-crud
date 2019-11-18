@@ -13,6 +13,9 @@
     <mat-error *ngIf="userForm.controls['email'].hasError('required') && userForm.controls['email'].touched">
       email is <strong>required</strong>
     </mat-error>
+    <mat-error *ngIf="userForm.controls['email'].hasError('emailTaken')">
+      email is already taken
+    </mat-error>
     <mat-form-field>
       <input matInput type="password" placeholder="password" formControlName="password" name="txtPassword2">
     </mat-form-field>

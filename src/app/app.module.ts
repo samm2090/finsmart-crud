@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 
 //services
 import { UserService } from './services/user.service';
+import { EmailvalidatorDirective } from './directives/emailvalidator.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    EmailvalidatorDirective,
   ],
   imports: [
     BrowserModule,
