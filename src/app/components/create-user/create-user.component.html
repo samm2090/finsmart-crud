@@ -2,25 +2,25 @@
   <div class="container" fxLayout="column" fxLayoutAlign="center">
     <h1>Login</h1>
     <mat-form-field>
-      <input matInput placeholder="username" formControlName="username"  [errorStateMatcher]="matcher">
+      <input matInput placeholder="username" formControlName="username" name="txtUsername2">
     </mat-form-field>
-    <mat-error *ngIf="userForm.controls['username'].hasError('required')">
+    <mat-error *ngIf="userForm.controls['username'].hasError('required') && userForm.controls['username'].touched">
       username is <strong>required</strong>
     </mat-error>
     <mat-form-field>
-      <input matInput placeholder="email" formControlName="email"  [errorStateMatcher]="matcher">
+      <input matInput placeholder="email" formControlName="email" name="txtEmail2">
     </mat-form-field>
-    <mat-error *ngIf="userForm.controls['password'].hasError('required')">
-      password is <strong>required</strong>
-    </mat-error>
-    <mat-form-field>
-      <input matInput type="password" placeholder="password" formControlName="password"  [errorStateMatcher]="matcher">
-    </mat-form-field>
-    <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+    <mat-error *ngIf="userForm.controls['email'].hasError('required') && userForm.controls['email'].touched">
       email is <strong>required</strong>
     </mat-error>
+    <mat-form-field>
+      <input matInput type="password" placeholder="password" formControlName="password" name="txtPassword2">
+    </mat-form-field>
+    <mat-error *ngIf="userForm.controls['password'].hasError('required') && userForm.controls['password'].touched">
+      password is <strong>required</strong>
+    </mat-error>
     <div fxLayout="row" fxLayoutAlign="center">
-      <button type="button" fxFlex="30" mat-raised-button color="primary" (click)="create()">Create</button>
+      <button type="button" fxFlex="30" mat-raised-button color="primary" (click)="create()" name="btnCreate2">Create</button>
     </div>
   </div>
 </form>

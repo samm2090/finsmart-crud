@@ -1,4 +1,8 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center">
+  <div fxLayout="row">
+    <span fxFlex="80"></span>
+    <button type="button" mat-raised-button color="warn" fxFlex="20" (click)="logout()">Logout</button>
+  </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef>Username</th>

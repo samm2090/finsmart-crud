@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import {Router} from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,6 +8,8 @@ import { EditDialogComponent } from './../../components/edit-dialog/edit-dialog.
 
 import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
+import { AuthService } from './../../services/auth.service';
+
 
 @Component({
   selector: 'app-user-list',
@@ -22,7 +25,9 @@ export class UserListComponent {
 
   constructor(private snackBar: MatSnackBar,
     private userService: UserService,
-    private matDialog: MatDialog) {
+    private matDialog: MatDialog,
+    private auth: AuthService,
+  private router: Router) {
     this.userService.findAll().subscribe((resp: any) => {
       this.users = resp;
       this.dataSource = new MatTableDataSource<User>(this.users);
@@ -42,6 +47,11 @@ export class UserListComponent {
       }
       this.dataSource.data = this.users;
     });
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(["/login"]);
   }
 
   delete(user: User) {

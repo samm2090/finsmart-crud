@@ -38,15 +38,6 @@ export class UserService {
     return this.http.delete(this.url + endpoint);
   }
 
-
-  login(loginUser: User): Observable<User> {
-    return new Observable(observer => {
-      this.findAll().subscribe((resp) => {
-        observer.next(resp.find(user => user.username == loginUser.username && user.password == loginUser.password));
-      });
-    });
-  }
-
   private createArray(obj: object) {
     const users: User[] = [];
 

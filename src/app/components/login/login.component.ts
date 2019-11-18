@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from './../../models/user';
-import { UserService } from './../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent {
 
   loading: boolean;
 
-  constructor(private userService: UserService,
+  constructor(private auth: AuthService,
     private snackBar: MatSnackBar,
     private router: Router) {
     this.loading = false;
@@ -30,12 +30,12 @@ export class LoginComponent {
 
     const user = new User(this.userForm.controls['username'].value, this.userForm.controls['password'].value);
 
-    this.userService.login(user).subscribe(resp => {
+    this.auth.login(user).subscribe(resp => {
       if (resp) {
         this.router.navigate(["/users"]);
-        this.snackBar.open("Logged in", "x",{duration: 1000});
+        this.snackBar.open("Logged in", "x", { duration: 1000 });
       } else {
-        this.snackBar.open("Wrong credentials", "x",{duration: 20000});
+        this.snackBar.open("Wrong credentials", "x", { duration: 2000 });
       }
       this.loading = false;
     });

@@ -17,7 +17,7 @@ export class LoginPage {
     return element(by.name("btnLogin"));
   }
 
-  getSnackBar(){
-    return element(by.css('.cdk-live-announcer-element'));
+  getSnackBar() {
+    return element(by.css('.mat-simple-snackbar')).element(by.tagName('span'));
   }
 }
